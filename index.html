@@ -1,12 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Train Schedule</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
 </head>
-<body>
-    
+
+<body style="max-width: 75%; margin: 0 auto">
+        <div class="jumbotron">
+            <div class="container" style="text-align: center">
+                <h1 class="display-4">Shining Time Station</h1>
+                <p class="lead">Locomotive Arrivals and Departures</p>
+            </div>
+        </div>
+        <table class="table table-boarded" style="border: black">
+            <div class="card-header" style="background-color: #47a1fc; color: snow">
+                <label for="head">Current Train Schedule</label>
+            </div>
+            <thead>
+                <tr>
+                    <th scope="col">Engine Name</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Frequency (Min)</th>
+                    <th scope="col">Next Arrival</th>
+                    <th scope="col">Minutes Away</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        </div>
+        <form>
+            <div class="card-header" style="background-color: #47a1fc; color: snow">
+                <label for="head">Add Train</label>
+            </div>
+            <div class="form-group">
+                <label for="name-input">Engine Name</label>
+                <input type="name" class="form-control" id="name" placeholder="Thomas the Tank Engine">
+            </div>
+            <div class="form-group">
+                <label for="role-input">Destination</label>
+                <input type="role" class="form-control" id="role" placeholder="Chattanooga">
+            </div>
+            <div class="form-group">
+                <label for="time-input">First Train Time (HH:mm - military time) </label>
+                <input type="time" class="form-control" id="time" placeholder="07:00">
+            </div>
+            <div class="form-group">
+                <label for="rate-input">Frequency (min)</label>
+                <input type="rate" class="form-control" id="rate" placeholder="20">
+            </div>
+            <div class="form-group">
+                <input class="btn btn-primary" id="submit" style="float: right" type="submit" value="Submit">
+            </div>
+        </form>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBF56kX1PkM8mM7LhCWxHJYyf5eLT0jBTg",
+            authDomain: "trainschedule-ac2c8.firebaseapp.com",
+            databaseURL: "https://trainschedule-ac2c8.firebaseio.com",
+            projectId: "trainschedule-ac2c8",
+            storageBucket: "trainschedule-ac2c8.appspot.com",
+            messagingSenderId: "919945277927"
+        };
+        firebase.initializeApp(config);
+    </script>
 </body>
+
 </html>
