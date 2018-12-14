@@ -83,7 +83,7 @@
         var time = "";
         var frequency = "";
         var minutesTime = "";
-        var arrivalTime = "";
+        var arriveTime = "";
         var remainingTime = "";
         var r = $("<tr>");
 
@@ -92,31 +92,36 @@
             time = $("#time").val().trim();
             name = $("#name").val().trim();
             destination = $("#destination").val().trim();
+            frequency = $("#frequency").val().trim();
+            //Calculate the number of minutes for the current time and for when the train starts
             startTime = new Date(time);
             currentTime = new Date();
             currentHour = currentTime.getHours();
             currentMinutes = currentTime.getMinutes();
-            frequency = $("#frequency").val().trim();
-            console.log(time);
-            console.log(currentTime);
-            console.log(currentHour);
-            console.log(currentMinutes);
+            startHour = (parseInt(time.charAt(0)) * 10) + parseInt(time.charAt(1));
+            startMinutes = (parseInt(time.charAt(3)) * 10) + parseInt(time.charAt(4));
             function convertTime(a, b) {
                 return (a * 60) + b;
             }
             minutesTime = convertTime(currentHour, currentMinutes);
-            minutesStart = convertTime()
-            
-            console.log(convertTime);
-
+            minutesStart = convertTime(startHour, startMinutes);
+            /*console.log(minutesTime);
+            console.log(minutesStart);
+            console.log(startHour);
+            console.log(startMinutes);*/
+            //Calculate when the next train will arrive from current time and start time;
+            remainingTime = frequency - ((minutesTime-minutesStart)%frequency);
+            arriveInt = (minutesTime + remainingTime);
+            arriveTime = (arriveInt - (arriveInt % 60)) / 60 + ":" + (arriveInt % 60);
+            console.log(arriveInt);
+            console.log(arriveTime);
             database.ref().push({
                 name: name,
                 destination: destination,
                 time: time,
-                //worked: worked,
                 frequency: frequency,
-                //arriveTime: arriveTime,
-                //remainingTime: remainingTime
+                arriveTime: arriveTime,
+                remainingTime: remainingTime
                 //dateAdded: firebase.database.ServerValue.TIMESTAMP
             });
         });
@@ -124,17 +129,16 @@
             var sv = snapshot.val();
             console.log(sv.name);
             console.log(sv.destination);
-            console.log(sv.time);
-            //console.log(sv.worked);
+            console.log(sv.arriveTime);
+            console.log(sv.remainingTime);
             console.log(sv.frequency);
             $("tbody").append("<tr>")
                 .append("<th scope= row>" + sv.name + "</th>")
                 .append("<td>" + sv.destination)
                 .append("<td>" + sv.frequency)
-                //.append("<td>" + sv.worked)
-                .append("<td>" + sv.frequency)
+                .append("<td>" + sv.arriveTime)
+                .append("<td>" + sv.remainingTime)
                 .append("</tr>");
-            console.log($("tbody"));
         }, function (errorObject) {
             console.log("Errors handled: " + errorObject.code);
         });
