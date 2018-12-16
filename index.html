@@ -11,8 +11,8 @@
 </head>
 
 <body style="max-width: 75%; margin: 0 auto">
-    <div class="jumbotron">
-        <div class="container" style="text-align: center">
+    <div class="jumbotron" style= "padding: 0">
+        <div class="container" style="text-align: center; background-image:url(https://i.redd.it/4vfjr9e1wuey.gif); background-position-y: center; background-repeat: no-repeat; background-size: cover; height: 30vh; width: 100%">
             <h1 class="display-4">Shining Time Station</h1>
             <p class="lead">Locomotive Arrivals and Departures</p>
         </div>
@@ -113,8 +113,6 @@
             remainingTime = frequency - ((minutesTime-minutesStart)%frequency);
             arriveInt = (minutesTime + remainingTime);
             arriveTime = (arriveInt - (arriveInt % 60)) / 60 + ":" + (arriveInt % 60);
-            console.log(arriveInt);
-            console.log(arriveTime);
             database.ref().push({
                 name: name,
                 destination: destination,
@@ -127,11 +125,6 @@
         });
         database.ref().on("child_added", function (snapshot) {
             var sv = snapshot.val();
-            console.log(sv.name);
-            console.log(sv.destination);
-            console.log(sv.arriveTime);
-            console.log(sv.remainingTime);
-            console.log(sv.frequency);
             $("tbody").append("<tr>")
                 .append("<th scope= row>" + sv.name + "</th>")
                 .append("<td>" + sv.destination)
